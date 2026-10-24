@@ -1,10 +1,10 @@
-const CACHE_NAME = "scan-plv-cache-v1";
+const CACHE_NAME = "scan-plv-cache-v2";
 const CORE_ASSETS = [
   "./", "./index.html", "./scanner.html", "./manifest.webmanifest",
-  "./favicon.svg?v=2", "./icon.svg", "./plv.css?v=9",
+  "./favicon.svg?v=2", "./icon.svg", "./plv.css?v=10",
   "./zxing.min.js", "./scan-core.js?v=8", "./pdf-lib.min.js",
-  "./plv-model.js?v=10", "./plv-export.js?v=10", "./castorama-reader.js?v=10",
-  "./plv.js?v=14", "./scanner.js?v=11", "./google-product-core.js", "./google-search.js",
+  "./plv-model.js?v=11", "./plv-export.js?v=10", "./castorama-reader.js?v=10",
+  "./plv.js?v=15", "./scanner.js?v=12", "./google-product-core.js", "./google-search.js",
   "./plv-template.pdf", "./banner-assets/promotion.png", "./banner-assets/quantity-limited.png",
   "./banner-assets/card-exclusive.png", "./banner-assets/casto-price.png",
   "./banner-assets/price-lowered.png", "./banner-assets/clearance.png",
