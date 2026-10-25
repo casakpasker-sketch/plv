@@ -3,6 +3,7 @@
 const ORIGIN='https://www.castorama.fr';
 function same(a,b){return String(a??'').padStart(14,'0')===b.padStart(14,'0')}
 function unescapeHtml(s){return String(s).replace(/&(?:amp|quot|apos|lt|gt|#x27|#39);/g,x=>({'&amp;':'&','&quot;':'"','&apos;':"'",'&#x27;':"'",'&#39;':"'",'&lt;':'<','&gt;':'>'}[x])).replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(Number(n)))}
+function benefitSummary(value){const text=unescapeHtml(value||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();const parts=text.match(/[^.!?]+(?:[.!?]+|$)/g)||[];let out='';for(const part of parts){const s=part.trim();if(!s||/^(retrouvez|découvrez|achetez|commandez)/i.test(s))continue;const next=out?out+' '+s:s;if(next.length>260)break;out=next;if(out.length>=150)break}return out}
 function extractProduct(html,code){
  const products=[];
  function walk(value){if(Array.isArray(value))return value.forEach(walk);if(!value||typeof value!=='object')return;if([value['@type']].flat().includes('Product'))products.push(value);if(value['@graph'])walk(value['@graph']);if(value.itemListElement)walk(value.itemListElement);if(value.item)walk(value.item)}
@@ -10,7 +11,7 @@ function extractProduct(html,code){
  const product=products.find(p=>[p.gtin13,p.gtin12,p.gtin14,p.gtin8,p.gtin].some(v=>v&&same(v,code)));if(!product||typeof product.name!=='string')return null;
  const offers=Array.isArray(product.offers)?product.offers:[product.offers];const offer=offers.find(o=>o&&o.price!=null&&o.price!==''&&Number.isFinite(Number(o.price))&&Number(o.price)>=0&&o.priceCurrency==='EUR');
  const candidate=product.url||offer?.url;let url;try{const parsed=new URL(candidate,ORIGIN);if(parsed.origin!==ORIGIN||!parsed.pathname.endsWith('/'+code+'_CAFR.prd'))return null;url=parsed.href}catch{return null}
- return{code,name:unescapeHtml(product.name),price:offer?Number(offer.price):null,currency:'EUR',url,availability:offer?.availability?.split('/').pop()||null,checkedAt:new Date().toISOString(),source:'Castorama.fr'};
+ return{code,name:unescapeHtml(product.name),benefits:benefitSummary(product.description),price:offer?Number(offer.price):null,currency:'EUR',url,availability:offer?.availability?.split('/').pop()||null,checkedAt:new Date().toISOString(),source:'Castorama.fr'};
 }
 async function lookup(code,signal,fetcher=fetch){
  if(!/^(?:\d{8}|\d{12,14})$/.test(code))throw Error('invalid_code');
