@@ -2,3 +2,8 @@
 
 /* Keep the single-choice control compact so the banner artwork has room to show. */
 .plv-section .banner-label input[type="radio"]{width:17px;height:17px;min-width:17px;flex:0 0 17px;padding:0;border:0;accent-color:#0757a6}
+
+/* Soft vertical snapping between product blocks. */
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
+.plv-block{scroll-snap-align:start;scroll-margin-block-start:16px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
