@@ -1,4 +1,4 @@
-const CACHE_NAME = "scan-plv-cache-v8";
+const CACHE_NAME = "scan-plv-cache-v9";
 const CORE_ASSETS = [
   "./", "./index.html", "./scanner.html", "./manifest.webmanifest",
   "./favicon.svg?v=2", "./icon.svg", "./plv.css?v=11",
