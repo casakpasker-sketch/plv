@@ -7,3 +7,7 @@
 html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .plv-block{scroll-snap-align:start;scroll-margin-block-start:16px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Restore free scrolling. */
+html{scroll-snap-type:none;scroll-behavior:auto}
+.plv-block{scroll-snap-align:none}
