@@ -1,4 +1,4 @@
-const CACHE_NAME = "scan-plv-cache-v9";
+const CACHE_NAME = "scan-plv-cache-v10";
 const CORE_ASSETS = [
   "./", "./index.html", "./scanner.html", "./manifest.webmanifest",
   "./favicon.svg?v=2", "./icon.svg", "./plv.css?v=11",
@@ -8,7 +8,7 @@ const CORE_ASSETS = [
   "./plv-template.pdf", "./banner-assets/promotion.png", "./banner-assets/quantity-limited.png",
   "./banner-assets/card-exclusive.png", "./banner-assets/casto-price.png",
   "./banner-assets/price-lowered.png", "./banner-assets/clearance.png",
-  "./banner-assets/outlet.png", "./banner-assets/standard.png"
+    "./banner-assets/outlet-logo.svg", "./banner-assets/standard.png"
 ];
 
 self.addEventListener("install", event => {
