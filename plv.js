@@ -6,7 +6,7 @@ try{saved=JSON.parse(localStorage.getItem(KEY)||'null')}catch{}
 const model=PLVModel.create(saved);if(!model.meta.date||!/^\d{4}-\d{2}-\d{2}$/.test(model.meta.date))model.meta.date=new Date().toLocaleDateString('sv-SE');
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=v=>v===''?'':String(v);
-const BANNER_IMAGES=['standard','promotion','quantity-limited','card-exclusive','casto-price','price-lowered','clearance','./banner-assets/outlet-logo.svg'];
+const BANNER_IMAGES=['standard','promotion','quantity-limited','card-exclusive','casto-price','price-lowered','clearance'].map(name=>'./banner-assets/'+name+'.png').concat('./banner-assets/outlet-logo.svg');
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(model.save()));$('plv-save').textContent='Demande enregistrée sur cet appareil.'}catch{$('plv-save').textContent='Sauvegarde locale indisponible. Téléchargez le PDF avant de fermer.'}updateCount()}
 function updateCount(){$('plv-count').textContent=model.count()+' produit'+(model.count()>1?'s':'')+' · '+Math.max(2,Math.ceil(model.count()/4))+' pages PDF (4 blocs par page)';$('export-pdf').disabled=model.count()===0;$('share-pdf').disabled=model.count()===0}
 function field(row,key,label,options=''){return '<label class="plv-field">'+label+'<input data-row="'+row.id+'" data-field="'+key+'" value="'+escape(row[key])+'" '+options+'></label>'}
